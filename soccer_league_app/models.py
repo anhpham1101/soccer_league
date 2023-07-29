@@ -24,6 +24,17 @@ class Club(models.Model):
     stadium = models.ForeignKey("Stadium", on_delete=models.SET_NULL, null=True)
 
 
+class Player(models.Model):
+    name = models.TextField()
+    club = models.ForeignKey("Club", on_delete=models.SET_NULL, null=True)
+    position = models.TextField()
+    nationality = models.ForeignKey("Nationality", on_delete=models.SET_NULL, null=True)
+    date_of_birth = models.DateField()
+    height = models.IntegerField()
+    clothers_number = models.IntegerField()
+    avatar = models.ImageField(null=True, blank=True, upload_to='images/players/')
+
+
 class SoccerMatch(models.Model):
     round = models.IntegerField()
     match_number = models.AutoField(primary_key=True)

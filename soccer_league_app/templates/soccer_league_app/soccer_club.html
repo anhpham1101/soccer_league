@@ -11,18 +11,25 @@
                 <th scope="col">Name</th>
                 <th scope="col">Stadium</th>
                 <th scope="col">City</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             {% for club in clubs %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ club.name }}</td>
+                <td><b>{{ club.name }}</b></td>
                 <td>{{ club.stadium.name }}</td>
                 <td>{{ club.stadium.city }}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="location.href='{% url "clubs_delete_view" club.id %}'">Delete</button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div name="update-club">
+        <button class="btn btn-primary" onclick="location.href='{% url "clubs_add_view" %}'">Add Clubs</button>
+    </div>
 </div>
 {% endblock %}

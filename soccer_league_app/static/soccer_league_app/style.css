@@ -13,7 +13,7 @@ div[name="table"] {
     border-width: 3px;
 }
 
-div[name="update-dashboard"] {
+div[name="update-dashboard"], div[name="update-player"], div[name="update-club"] {
     display: flex;
     justify-content: center;
     align-items: center;

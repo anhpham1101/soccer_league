@@ -8,8 +8,9 @@ from django.urls import reverse
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.db.models import Q
+from django.views.generic import CreateView
 
-from .models import Club, Stadium, SoccerMatch
+from .models import Club, Player, Stadium, SoccerMatch
 
 WIN_SCORE = 3
 DRAW_SCORE = 1
@@ -19,6 +20,27 @@ def soccer_club_view(request):
     clubs = Club.objects.all()
     context = dict(clubs=clubs)
     return render(request, 'soccer_league_app/soccer_club.html', context)
+
+
+def soccer_club_add_view(request):
+    # TODO LATER
+    return redirect('/')
+
+
+def soccer_club_delete_view(request, club_id):
+    Club.objects.filter(id=club_id).delete()
+    return redirect('/clubs')
+
+
+def soccer_player_view(request):
+    players = Player.objects.all()
+    context = dict(players=players)
+    return render(request, 'soccer_league_app/soccer_player.html', context)
+
+
+def soccer_player_delete_view(request, player_id):
+    Player.objects.filter(id=player_id).delete()
+    return redirect('/players')
 
 
 def soccer_stadium_view(request):
@@ -162,3 +184,19 @@ def post_process_ranking_data(ranking_data):
         ranking_data[club]['point'] = club_data['num_match_won'] * WIN_SCORE + club_data['num_match_drawn'] * DRAW_SCORE
         ranking_data[club]['short_history'] = club_data['history'][-5:]
     return ranking_data
+
+
+class PlayerCreate(CreateView):
+    model = Player
+    fields = ["name", "position", "date_of_birth", "avatar", "club", "nationality", "clothers_number", "height"]
+
+    def get_success_url(self):
+        return reverse('players_view')
+
+
+class ClubCreate(CreateView):
+    model = Club
+    fields = ["name", "logo", "stadium", "short_name"]
+
+    def get_success_url(self):
+        return reverse('clubs_view')

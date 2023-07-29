@@ -1,0 +1,16 @@
+{%extends 'soccer_league_app/base.html' %}
+{% block content %}
+<h3>{{ title }}</h3>
+<form method="post">
+    {% csrf_token %}
+    <div class="table-responsive" name="table">
+        <table>
+            {{ form.as_table }}
+        </table>
+        <div name="update-player">
+            <button class="btn btn-primary" type="submit" style="margin: 5px;">Submit</button>
+            <button class="btn btn-danger" style="margin: 5px;" onclick="location.href='{% url "players_view" %}'">Cancel</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
