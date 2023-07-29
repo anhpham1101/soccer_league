@@ -1,0 +1,28 @@
+{%extends 'soccer_league_app/base.html' %}
+{% block content %}
+<div name="title">
+    <h2>Stadiums</h2>
+</div>
+<div class="table-responsive" name="table">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">City</th>
+                <th scope="col">Establish Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stadium in stadiums %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ stadium.name }}</td>
+                <td>{{ stadium.city }}</td>
+                <td>{{ stadium.establish_year }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

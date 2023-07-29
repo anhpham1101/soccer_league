@@ -1,0 +1,30 @@
+{%extends 'soccer_league_app/base.html' %}
+{% block content %}
+<div name="title">
+    <h2>Soccer Matches</h2>
+</div>
+<div class="table-responsive" name="table">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Round</th>
+                <th scope="col">Home</th>
+                <th scope="col">Score</th>
+                <th scope="col">Away</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in matches %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ match.round }}</td>
+                <td>{{ match.home_club.name }}</td>
+                <td>{{ match.ft_home_goal }} - {{ match.ft_away_goal }}</td>
+                <td>{{ match.away_club.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
